@@ -3,6 +3,5 @@ jobs:
     - language: java
       jdk: oraclejdk12
       script:
-        - cd backend
         - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
         - mvn test
