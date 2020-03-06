@@ -1,9 +1,9 @@
-package requests
+package dev.arxiv.name.requests
 
-import options.SearchOperator
-import options.SearchField
-import options.SortBy
-import options.SortOrder
+import dev.arxiv.name.options.SearchOperator
+import dev.arxiv.name.options.SearchField
+import dev.arxiv.name.options.SortBy
+import dev.arxiv.name.options.SortOrder
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

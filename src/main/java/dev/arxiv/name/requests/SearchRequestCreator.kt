@@ -1,9 +1,9 @@
-package requests
+package dev.arxiv.name.requests
 
-import options.SearchOperator
-import options.SearchField
-import options.SortBy
-import options.SortOrder
+import dev.arxiv.name.options.SearchOperator
+import dev.arxiv.name.options.SearchField
+import dev.arxiv.name.options.SortBy
+import dev.arxiv.name.options.SortOrder
 
 /**
  * The SearchRequestCreator represents methods for creating a search request to arxiv.org.
@@ -27,7 +27,7 @@ class SearchRequestCreator(mainSearchOptions: String, searchField: SearchField) 
     private var searchQuery: String = formSearchOption(mainSearchOptions, searchField)
 
     /**
-     * Add's a new search options with the command "AND"
+     * Add's a new search dev.arxiv.name.options with the command "AND"
      *
      * @param searchOptions word to search
      * @param searchField name of fields to be searched
@@ -39,7 +39,7 @@ class SearchRequestCreator(mainSearchOptions: String, searchField: SearchField) 
     }
 
     /**
-     * Add's a new search options with the command "OR"
+     * Add's a new search dev.arxiv.name.options with the command "OR"
      *
      * @param searchOptions word to search
      * @param searchField name of fields to be searched
@@ -51,7 +51,7 @@ class SearchRequestCreator(mainSearchOptions: String, searchField: SearchField) 
     }
 
     /**
-     * Add's a new search options with the command "AND_NOT"
+     * Add's a new search dev.arxiv.name.options with the command "AND_NOT"
      *
      * @param searchOptions word to search
      * @param searchField name of fields to be searched
@@ -107,7 +107,7 @@ class SearchRequestCreator(mainSearchOptions: String, searchField: SearchField) 
     }
 
     /**
-     * Sets idList options
+     * Sets idList dev.arxiv.name.options
      *
      * @param idList a comma-delimited list of arXiv id's
      * @return this

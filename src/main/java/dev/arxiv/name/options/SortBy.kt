@@ -1,4 +1,4 @@
-package options
+package dev.arxiv.name.options
 
 enum class SortBy(val optionName: String) {
     RELEVANSE("relevance"),

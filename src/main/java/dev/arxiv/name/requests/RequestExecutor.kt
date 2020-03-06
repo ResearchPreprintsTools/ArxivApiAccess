@@ -1,8 +1,8 @@
-package requests
+package dev.arxiv.name.requests
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
-import data.Feed
+import dev.arxiv.name.data.Feed
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.apache.Apache
 import io.ktor.client.request.get

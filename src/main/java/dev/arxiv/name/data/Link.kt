@@ -1,4 +1,4 @@
-package data
+package dev.arxiv.name.data
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

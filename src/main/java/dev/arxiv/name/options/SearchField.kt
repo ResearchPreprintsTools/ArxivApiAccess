@@ -1,4 +1,4 @@
-package options
+package dev.arxiv.name.options
 
 /**
  * The SearchPrefix sets the names of the fields to be searched.
