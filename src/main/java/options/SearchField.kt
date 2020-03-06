@@ -1,6 +1,9 @@
 package options
 
-enum class SearchPrefix(val optionName: String) {
+/**
+ * The SearchPrefix sets the names of the fields to be searched.
+ */
+enum class SearchField(val optionName: String) {
     TITLE("ti"),
     AUTHOR("au"),
     ABSTRACT("abs"),
