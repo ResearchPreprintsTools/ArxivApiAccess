@@ -1,0 +1,23 @@
+build:
+  # figure out how to generate baseline file and decrease to 1 (https://github.com/Ozsie/detekt-maven-plugin/issues/38)
+  maxIssues: 2
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+formatting:
+  MaximumLineLength:
+    maxLineLength: 160
+
+style:
+  ForbiddenComment:
+    active: false
+  MaxLineLength:
+    maxLineLength: 160
+  MagicNumber:
+    ignoreEnums: true
+
+empty-blocks:
+  EmptyFunctionBlock:
+    active: false
