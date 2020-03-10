@@ -156,6 +156,6 @@ private val classificationMap: Map<String, String> = mapOf(
         Pair("stat.TH", "Statistics Theory"))
 
 /**
- * That function converts dev.arxiv.name.data.Category#term to readable form
+ * That function converts the dev.arxiv.name.data.Category#term to a readable form
  */
 fun convertTermCode(term: String): String? = classificationMap[term]
