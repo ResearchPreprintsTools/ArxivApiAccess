@@ -1,6 +1,5 @@
 package dev.arxiv.name.requests
 
-import dev.arxiv.name.data.Feed
 import dev.arxiv.name.options.SearchOperator
 import dev.arxiv.name.options.SearchField
 import dev.arxiv.name.options.SortBy
