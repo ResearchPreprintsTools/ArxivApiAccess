@@ -16,6 +16,6 @@ fun executeSearchRequest(request: SearchRequestCreator): Feed {
 }
 
 private fun executeRequest(url: String): String = runBlocking {
-    HttpClient(Apache).get<String>(url)
+    HttpClient(Apache).get(url)
 }
 
