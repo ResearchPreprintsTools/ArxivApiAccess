@@ -6,6 +6,13 @@ ArvixApiAccess is Kotlin written library to make search requests to API of Arvix
 
 ## Getting started with Maven
 ``` xml
+<repository>
+    <id>myMavenRepoRead</id>
+    <url>https://mymavenrepo.com/repo/m3NxrnIEacYdXdF77zDL/</url>
+</repository>
+
+...
+
 <dependency>
   <groupId>olegthelilfix</groupId>
   <artifactId>ArxivApiAccess</artifactId>
