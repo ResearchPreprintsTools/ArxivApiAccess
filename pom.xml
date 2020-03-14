@@ -10,10 +10,13 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/olegthelilfix/ArxivApiAccess</url>
+            <id>myMavenRepoWrite</id>
+            <url>https://mymavenrepo.com/repo/kFVsB2plZ7ZeF3whdFM3/</url>
         </repository>
+        <snapshotRepository>
+            <id>myMavenRepoWrite</id>
+            <url>https://mymavenrepo.com/repo/kFVsB2plZ7ZeF3whdFM3/</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <repositories>
