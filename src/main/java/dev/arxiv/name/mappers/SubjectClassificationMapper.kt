@@ -1,5 +1,7 @@
 package dev.arxiv.name.mappers
 
+import dev.arxiv.name.exeptions.TermNotFoundException
+
 private val classificationMap: Map<String, String> = mapOf(
         Pair("astro-ph", "Astrophysics"),
         Pair("astro-ph.CO", "Cosmology and Nongalactic Astrophysics"),
@@ -153,9 +155,20 @@ private val classificationMap: Map<String, String> = mapOf(
         Pair("stat.ME", "Methodology"),
         Pair("stat.ML", "Machine Learning"),
         Pair("stat.OT", "Other Statistics"),
-        Pair("stat.TH", "Statistics Theory"))
+        Pair("stat.TH", "Statistics Theory")
+)
 
 /**
  * That function converts the dev.arxiv.name.data.Category#term to a readable form
  */
-fun convertTermCode(term: String): String? = classificationMap[term]
+fun convertTermCode(term: String?): String = convertTermCodeOrNull(term) ?: throw TermNotFoundException("Term $term had not found.")
+
+/**
+ * That function converts the dev.arxiv.name.data.Category#term to a readable form
+ */
+fun convertTermCodeOrDefault(term: String?, defaultValue: String): String = convertTermCodeOrNull(term) ?: defaultValue
+
+/**
+ * That function converts the dev.arxiv.name.data.Category#term to a readable form
+ */
+fun convertTermCodeOrNull(term: String?): String? = term?.let { classificationMap[term] }

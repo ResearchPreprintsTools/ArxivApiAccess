@@ -44,4 +44,5 @@ data class Entry(
          */
         @JsonProperty("link")
         @JacksonXmlElementWrapper(useWrapping = false)
-        val link: List<Link>)
+        val link: List<Link>
+)

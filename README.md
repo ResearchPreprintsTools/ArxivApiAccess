@@ -22,17 +22,37 @@ ArvixApiAccess is Kotlin written library to make search requests to API of Arvix
 
 ## A simple example of usage
 ``` kotlin
-val request: SearchRequestCreator = SearchRequestCreator("Java", SearchField.ALL)
+val request: SearchRequest = SearchRequest.SearchRequestBuilder
+            .create("Java", SearchField.ALL)
             .or("Kotlin", SearchField.ALL)
             .andNot("Groovy", SearchField.ALL)
             .sortBy(SortBy.LAST_UPTATED_DATE)
             .sortOrder(SortOrder.ASCENDING)
-            .maxResult(20)
+            .maxResults(20)
+            .build()
 
-val response: Feed = executeSearchRequest(request)
+val response: Feed = SearchRequestExecutor().executeAndMap(request)
+
+val responseAsString: String = SearchRequestExecutor().execute(request)
     
 println(response)
+println(responseAsString)
 ```
+
+## mapping of subjects
+``` kotlin
+feed.entry?.forEach {
+    it.category.forEach { category ->
+        try {
+            val categoryFullName = convertTermCode(category.term)
+            println("Mapped ${category.term} to ${categoryFullName}")
+        }
+        catch (e: TermNotFoundException) {
+            println(e.message)
+        }
+    }
+}
+``` 
 
 ## contacts
 Feel free to email me at [olegthelilfix@pm.me](mailto:olegthelilfix@pm.me)
