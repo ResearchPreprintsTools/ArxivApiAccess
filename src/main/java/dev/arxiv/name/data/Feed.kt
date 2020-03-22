@@ -41,4 +41,5 @@ data class Feed(
          */
         @JsonProperty("entry")
         @JacksonXmlElementWrapper(useWrapping = false)
-        val entry: List<Entry>?)
+        val entry: List<Entry>?
+)
