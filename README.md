@@ -54,6 +54,33 @@ feed.entry?.forEach {
 }
 ``` 
 
+## loading all by request
+``` kotlin
+val subjectCategory = "astro-ph"
+val fileToSave = "../arxiv_data_sets/${subjectCategory}.csv"
+
+val request = SearchRequest.SearchRequestBuilder
+        .create(subjectCategory, SearchField.SUBJECT_CATEGORY)
+        .sortBy(SortBy.LAST_UPTATED_DATE)
+        .sortOrder(SortOrder.ASCENDING)
+        .build()
+
+loadAllByRequest(request, {feed ->
+    // save to file 
+    val writer = FileWriter(fileToSave, true)
+    writer.use {
+        feed.entry?.forEach {
+            val authorString = it.author.joinToString(", ") { author -> author.name }
+            val resultString = "${it.updated}|${subjectCategory}|${it.title}|${authorString}".replace("\n", "")
+            writer.write("${resultString}\n")
+        }
+        writer.close()
+    }
+
+    println("parsed ${feed.startIndex+feed.itemsPerPage}/${feed.totalResults}")
+})
+``` 
+
 ## contacts
 Feel free to email me at [olegthelilfix@pm.me](mailto:olegthelilfix@pm.me)
 

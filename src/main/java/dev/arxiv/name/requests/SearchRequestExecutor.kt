@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 /**
  * That class execute search a request and map a result of response to Object
  */
-class SearchRequestExecutor(private val client: HttpClient = HttpClient(Apache)) {
+class SearchRequestExecutor {
     private val mapper = XmlMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
@@ -27,8 +27,10 @@ class SearchRequestExecutor(private val client: HttpClient = HttpClient(Apache))
      * Execute request and return result as String
      */
     fun execute(request: SearchRequest): String {
+        val client = HttpClient(Apache)
+
         return runBlocking {
-            client.get<String>(request.createUrlAsString())
+            client.use { it.get<String>(request.createUrlAsString()) }
         }
     }
 }
