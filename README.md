@@ -81,6 +81,18 @@ loadAllByRequest(request, {feed ->
 })
 ``` 
 
+## loading all after date
+``` kotlin
+val request: SearchRequest = SearchRequest.SearchRequestBuilder
+        .create("Java", SearchField.ALL)
+        .or("Kotlin", SearchField.ALL)
+        .build()
+
+var list = searchAllAfterDate(request, Date(System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS)))
+
+println(list)
+``` 
+
 ## contacts
 Feel free to email me at [olegthelilfix@pm.me](mailto:olegthelilfix@pm.me)
 

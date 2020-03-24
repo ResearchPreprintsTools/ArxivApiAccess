@@ -2,6 +2,7 @@ package dev.arxiv.name.data
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
+import java.util.*
 
 /**
  * The Entry contains information about an article
@@ -14,11 +15,11 @@ data class Entry(
         /**
          * Contains the date on which the retrieved article was submitted and processed
          */
-        @JsonProperty("updated") val updated: String,
+        @JsonProperty("updated") val updated: Date,
         /**
          * Contains the date in which the first version of this article was submitted and processed
          */
-        @JsonProperty("published") val published: String,
+        @JsonProperty("published") val published: Date,
         /**
          * Contains the title of the article
          */
