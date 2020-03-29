@@ -19,7 +19,7 @@ import dev.arxiv.name.options.SortOrder
 class SearchRequest(private val searchRequestBuilder: SearchRequestBuilder) {
 
     /**
-     * Сreate's a string containing all specified query parameters
+     * Сreating a string containing all specified query parameters
      *
      */
     fun createUrlAsString() = buildString {
@@ -31,11 +31,27 @@ class SearchRequest(private val searchRequestBuilder: SearchRequestBuilder) {
         searchRequestBuilder.idList?.let { append("&id_list=${searchRequestBuilder.idList}") }
     }
 
-    private fun createSearchQuery() : String = searchRequestBuilder.params.joinToString("") {
-        "${it.searchOperator.optionName}${it.searchField.optionName}:${it.searchOption}"
+    fun cloneAsBuilder(): SearchRequestBuilder {
+        return SearchRequestBuilder.create(searchRequestBuilder.mainSearchOptions, searchRequestBuilder.mainSearchField)
+                .uri(searchRequestBuilder.arxivApiUri)
+                .sortBy(searchRequestBuilder.sortBy)
+                .sortOrder(searchRequestBuilder.sortOrder)
+                .start(searchRequestBuilder.start)
+                .maxResults(searchRequestBuilder.maxResults)
+                .idList(searchRequestBuilder.idList)
+                .params(searchRequestBuilder.params.toMutableList())
     }
 
-    class SearchRequestBuilder private constructor(searchOptions: String, searchField: SearchField) {
+    private fun createSearchQuery(): String {
+        val paramsAsString = searchRequestBuilder.params.joinToString("") {
+            "${it.searchOperator.optionName}${it.searchField.optionName}:${it.searchOption}"
+        }
+
+        return "${searchRequestBuilder.mainSearchField.optionName}:${searchRequestBuilder.mainSearchOptions}${paramsAsString}"
+    }
+
+    @SuppressWarnings("TooManyFunctions")
+    class SearchRequestBuilder private constructor(val mainSearchOptions: String, val mainSearchField: SearchField) {
         var arxivApiUri: String = "http://export.arxiv.org/api/query"
         var sortBy: SortBy? = null
         var sortOrder: SortOrder? = null
@@ -43,10 +59,6 @@ class SearchRequest(private val searchRequestBuilder: SearchRequestBuilder) {
         var maxResults: Int? = null
         var idList: String? = null
         var params: MutableList<SearchOptions> = mutableListOf()
-
-        init {
-            params.add(SearchOptions(searchOptions, searchField, SearchOperator.EMPTY))
-        }
 
         companion object {
             fun create(searchOptions: String, searchField: SearchField) = SearchRequestBuilder(searchOptions, searchField)
@@ -66,15 +78,17 @@ class SearchRequest(private val searchRequestBuilder: SearchRequestBuilder) {
 
         fun uri(value: String) = apply { arxivApiUri = value }
 
-        fun sortBy(value: SortBy) = apply { sortBy = value }
+        fun sortBy(value: SortBy?) = apply { sortBy = value }
 
-        fun sortOrder(value: SortOrder) = apply { sortOrder = value }
+        fun sortOrder(value: SortOrder?) = apply { sortOrder = value }
 
-        fun start(value: Int) = apply { start = value }
+        fun start(value: Int?) = apply { start = value }
 
-        fun maxResults(value: Int) = apply { maxResults = value }
+        fun maxResults(value: Int?) = apply { maxResults = value }
 
-        fun idList(value: String) = apply { idList = value }
+        fun idList(value: String?) = apply { idList = value }
+
+        fun params(value: MutableList<SearchOptions>) = apply { params = value }
 
         fun build(): SearchRequest {
             return SearchRequest(this)

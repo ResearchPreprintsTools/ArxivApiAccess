@@ -6,7 +6,7 @@
 
     <groupId>olegthelilfix</groupId>
     <artifactId>ArxivApiAccess</artifactId>
-    <version>0.1-RELEASE</version>
+    <version>0.2-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
