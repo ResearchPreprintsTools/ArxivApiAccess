@@ -4,9 +4,10 @@
 [![GuardRails badge](https://badges.guardrails.io/olegthelilfix/ArxivApiAccess.svg?token=b7c2657f559528c6c5b76c14c0a07f739b50503091369b47dd5cab61e41cbe8b&provider=github)](https://dashboard.guardrails.io/default/gh/olegthelilfix/ArxivApiAccess)
 [![GitHub License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 # ArvixApiAccess 
-ArvixApiAccess is Kotlin written library to make search requests to API of Arvix.org
+ArvixApiAccess is Kotlin written open-source library to make search requests to API of Arvix.org
 
 ## Getting started with Maven
+In order to start using you should add that dependency to your project.
 ``` xml
 <repository>
     <id>myMavenRepoRead</id>
@@ -24,12 +25,12 @@ ArvixApiAccess is Kotlin written library to make search requests to API of Arvix
 
 ## A simple example of usage
 ``` kotlin
+// Request to find the last 20 articles about Java or Kotlin 
 val request: SearchRequest = SearchRequest.SearchRequestBuilder
             .create("Java", SearchField.ALL)
             .or("Kotlin", SearchField.ALL)
-            .andNot("Groovy", SearchField.ALL)
             .sortBy(SortBy.LAST_UPTATED_DATE)
-            .sortOrder(SortOrder.ASCENDING)
+            .sortOrder(SortOrder.DESCENDING)
             .maxResults(20)
             .build()
 
@@ -41,30 +42,14 @@ println(response)
 println(responseAsString)
 ```
 
-## mapping of subjects
+## load all by request to file
 ``` kotlin
-feed.entry?.forEach {
-    it.category.forEach { category ->
-        try {
-            val categoryFullName = convertTermCode(category.term)
-            println("Mapped ${category.term} to ${categoryFullName}")
-        }
-        catch (e: TermNotFoundException) {
-            println(e.message)
-        }
-    }
-}
-``` 
-
-## loading all by request
-``` kotlin
-val subjectCategory = "astro-ph"
+val subjectCategory = "JAVA"
 val fileToSave = "../arxiv_data_sets/${subjectCategory}.csv"
 
+// All article about java
 val request = SearchRequest.SearchRequestBuilder
-        .create(subjectCategory, SearchField.SUBJECT_CATEGORY)
-        .sortBy(SortBy.LAST_UPTATED_DATE)
-        .sortOrder(SortOrder.ASCENDING)
+        .create(subjectCategory, SearchField.ALL)
         .build()
 
 loadAllByRequest(request, {feed ->
@@ -80,11 +65,14 @@ loadAllByRequest(request, {feed ->
     }
 
     println("parsed ${feed.startIndex+feed.itemsPerPage}/${feed.totalResults}")
+    // return false to stop a process of the parsing
+    true
 })
 ``` 
 
-## loading all after date
+## load all after date
 ``` kotlin
+// the request to find all articles about Java or Kotlin for last 30 days
 val request: SearchRequest = SearchRequest.SearchRequestBuilder
         .create("Java", SearchField.ALL)
         .or("Kotlin", SearchField.ALL)
@@ -93,6 +81,21 @@ val request: SearchRequest = SearchRequest.SearchRequestBuilder
 var list = searchAllAfterDate(request, Date(System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS)))
 
 println(list)
+``` 
+
+## mapping of subjects
+``` kotlin
+feed.entry?.forEach {
+    it.category.forEach { category ->
+        try {
+            val categoryFullName = convertTermCode(category.term)
+            println("Mapped ${category.term} to ${categoryFullName}")
+        }
+        catch (e: TermNotFoundException) {
+            println(e.message)
+        }
+    }
+}
 ``` 
 
 ## contacts

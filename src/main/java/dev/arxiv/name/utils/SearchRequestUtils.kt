@@ -3,13 +3,11 @@ package dev.arxiv.name.utils
 import dev.arxiv.name.data.Entry
 import dev.arxiv.name.data.Feed
 import dev.arxiv.name.exeptions.LoadStepIsNotCorrect
-import dev.arxiv.name.options.SearchField
 import dev.arxiv.name.options.SortBy
 import dev.arxiv.name.options.SortOrder
 import dev.arxiv.name.requests.SearchRequest
 import dev.arxiv.name.requests.SearchRequestExecutor
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * Loading all data by request and push it to callback.
