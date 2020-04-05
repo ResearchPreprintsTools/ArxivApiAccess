@@ -70,7 +70,7 @@ loadAllByRequest(request, {feed ->
 })
 ``` 
 
-## load all after date
+## load all from date to date
 ``` kotlin
 // the request to find all articles about Java or Kotlin for last 30 days
 val request: SearchRequest = SearchRequest.SearchRequestBuilder
@@ -78,7 +78,7 @@ val request: SearchRequest = SearchRequest.SearchRequestBuilder
         .or("Kotlin", SearchField.ALL)
         .build()
 
-var list = searchAllAfterDate(request, Date(System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS)))
+var list = searchAllByPeriod(request, Date(System.currentTimeMillis() - TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS)))
 
 println(list)
 ``` 

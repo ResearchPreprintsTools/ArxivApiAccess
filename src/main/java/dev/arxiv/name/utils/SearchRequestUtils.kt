@@ -38,11 +38,11 @@ fun loadAllByRequest(request: SearchRequest, callback: (feed: Feed) -> Boolean, 
 
 
 /**
- * Loading all article after date
+ * Loading all article from and to date
  * Function ignore SearchRequestBuilder.start, SearchRequestBuilder.maxResults, SearchRequestBuilder.sortBy and
  * SearchRequestBuilder.sortOrder
  */
-fun searchAllAfterDate(request: SearchRequest, date: Date, loadStep: Int = 100): List<Entry> {
+fun searchAllByPeriod(request: SearchRequest, fromDate: Date, toDate: Date = Date(), loadStep: Int = 100): List<Entry> {
     val result = mutableListOf<Entry>()
 
     val innerRequest = request.cloneAsBuilder()
@@ -53,13 +53,13 @@ fun searchAllAfterDate(request: SearchRequest, date: Date, loadStep: Int = 100):
     loadAllByRequest(request = innerRequest, loadStep = loadStep, callback = { feed ->
         feed.entry?.let { entry ->
             result.addAll(entry.filter { article ->
-                article.published >= date
+                article.published in fromDate..toDate
             })
         }
 
         val lastArticlePublishedDate: Date? = feed.entry?.last()?.published
 
-        if (lastArticlePublishedDate != null) lastArticlePublishedDate >= date else false
+        if (lastArticlePublishedDate != null) lastArticlePublishedDate >= fromDate else false
     })
 
     return result
