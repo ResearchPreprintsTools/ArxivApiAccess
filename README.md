@@ -98,6 +98,9 @@ feed.entry?.forEach {
 }
 ``` 
 
+#linked projects
+@articleflowbot or [ArticleFlow github](https://github.com/olegthelilfix/ArticleFlow) is the telegram bot to make search request to arxiv.org
+
 ## contacts
 Feel free to email me at [olegthelilfix@pm.me](mailto:olegthelilfix@pm.me)
 
