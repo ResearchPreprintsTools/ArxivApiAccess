@@ -23,6 +23,24 @@ In order to start using you should add that dependency to your project.
 </dependency>
 ```
 
+## Getting started with gradle
+In order to start using you should add that dependency to your project.
+``` xml
+repositories {
+    ...
+    maven {
+        url "https://mymavenrepo.com/repo/m3NxrnIEacYdXdF77zDL/"
+    }
+    ...
+}
+...
+dependencies {
+    ...
+    compile group: 'olegthelilfix', name: 'ArxivApiAccess', version: '0.2-RELEASE'
+    ...
+}
+```
+
 ## A simple example of usage
 ``` kotlin
 // Request to find the last 20 articles about Java or Kotlin 
